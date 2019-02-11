@@ -86,8 +86,9 @@ export class SlideshowComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public runAutoplay() {
-    if (this.intervalStart)
+    if (this.intervalStart) {
       clearInterval(this.intervalStart);
+    }
 
     this.intervalStart = setInterval(this.moveSlide.bind(this, SLIDE_DIRECTION.RIGHT), 4000);
   }
@@ -109,10 +110,10 @@ export class SlideshowComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.currentSlideIndex === edgeSlideIndex) {
       this.currentSlideIndex = !edgeSlideIndex ? this.slidesLength - 1 : 0;
 
-      if(this.slideshowTransitionEnabled)
+      if (this.slideshowTransitionEnabled) {
         this.moveEdgeSlides(edgeSlideTranstionStep, edgeSlide, edgeSlideTranslatePosition);
-      else {
-        this.currentTranslatePosition = edgeSlideIndex ? 0 : -100 + translateStep;
+      } else {
+        this.currentTranslatePosition = edgeSlideIndex ? 0 : translateStep - 100;
         this.moveSlider(0);
       }
     } else {
@@ -155,7 +156,7 @@ export class SlideshowComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  private translate(item: HTMLElement, step: number, animation=true): void {
+  private translate(item: HTMLElement, step: number, animation= true): void {
     item.style.transition = animation ? '' : 'none';
     item.style.transform = `translate(${step}%)`;
   }
